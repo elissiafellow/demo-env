@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: namespaces
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/elissiafellow/demo-env.git'
+    targetRevision: main
+    path: kubernetes/production/namespaces
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      selfHeal: false
+      prune: false
+    syncOptions:
+      - Validate=true
+      - CreateNameSpace=true
+      - PruneProgationPolicy=foreground
+      - PruneLast=false
+      - Replace=false
+      - ApplyOutOfSyncOnly=false
+      - ServerSideApply=false
+      - RespectIgnoreDifferences=false # whether to ignore differences while syncing or not, used when explicitly use ignoredifference feature

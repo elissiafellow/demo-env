@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: headlamp
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "14"
+spec:
+  project: default
+  sources:
+    - chart: headlamp
+      repoURL: https://headlamp-k8s.github.io/headlamp/
+      targetRevision: ""  # Uses latest chart version
+      helm:
+        releaseName: headlamp
+        valueFiles:
+          - "$values/kubernetes/argocd-helmcharts/values/headlamp-values.yaml"
+    - repoURL: 'https://github.com/elissiafellow/demo-env.git'
+      targetRevision: main
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: headlamp
+  syncPolicy:
+    automated:
+      selfHeal: false
+      prune: false
+    syncOptions:
+      - Validate=true
+      - CreateNameSpace=true
+      - PruneProgationPolicy=foreground
+      - PruneLast=false
+      - Replace=false
+      - ApplyOutOfSyncOnly=false
+      - ServerSideApply=false
+      - RespectIgnoreDifferences=false

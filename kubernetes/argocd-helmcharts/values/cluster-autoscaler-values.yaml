@@ -1,0 +1,16 @@
+# Cluster Autoscaler values
+# Update these values with your actual cluster details
+
+rbac:
+  serviceAccount:
+    name: cluster-autoscaler
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::367896522183:role/eks-cluster-autoscaler
+
+autoDiscovery:
+  enabled: true
+  clusterName: demo-eks
+
+clusterName: demo-eks
+awsRegion: eu-central-1
+vpcId: vpc-05627c1fe1319fc39  # Update with your VPC ID
