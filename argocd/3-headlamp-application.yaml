@@ -10,7 +10,9 @@ spec:
   sources:
     - chart: headlamp
       repoURL: https://kubernetes-sigs.github.io/headlamp/
-      targetRevision: ""  # Uses latest chart version
+     # spec.source.targetRevision is required if the manifest source is a helm chart
+#targetRevision: "" 
+      targetRevision: "*"  # Uses latest chart version
       helm:
         releaseName: headlamp
         valueFiles:
