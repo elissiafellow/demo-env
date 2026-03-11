@@ -9,7 +9,7 @@ spec:
   project: default
   sources:
     - chart: headlamp
-      repoURL: https://headlamp-k8s.github.io/headlamp/
+      repoURL:  https://github.com/kubernetes-sigs/headlamp.git/charts/headlamp
       targetRevision: ""  # Uses latest chart version
       helm:
         releaseName: headlamp
