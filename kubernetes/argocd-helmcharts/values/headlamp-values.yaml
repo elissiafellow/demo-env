@@ -129,7 +129,8 @@ service:
   # Using ClusterIP for port-forwarding access (no ALB/LoadBalancer needed)
   type: ClusterIP
   # -- Kubernetes Service port
-  port: 80
+  # Headlamp listens on port 4466 by default, so service port should match
+  port: 4466
   # -- Kubernetes Service clusterIP
   clusterIP: ""
   # -- Kubernetes Service loadBalancerIP
